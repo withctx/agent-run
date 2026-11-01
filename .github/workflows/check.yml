@@ -1,0 +1,20 @@
+name: Check
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun run build
+      - name: The committed bundle matches the source
+        run: git diff --exit-code dist/

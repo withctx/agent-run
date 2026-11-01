@@ -1,0 +1,16 @@
+{
+  "name": "agent-run",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "description": "GitHub workflow action for withctx agents. Its bundle in dist/ is what GitHub executes, so it is committed.",
+  "scripts": {
+    "build": "bun build index.ts --target=node --format=esm --outfile=dist/index.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  }
+}

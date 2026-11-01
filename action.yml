@@ -1,0 +1,38 @@
+name: withctx
+description: Run a withctx agent in your workflow. It passes or fails the job on what it reports.
+author: withctx
+branding:
+  icon: cpu
+  color: gray-dark
+inputs:
+  agent:
+    description: The agent's slug, shown on its GitHub connection in withctx.
+    required: true
+  prompt:
+    description: What the agent should do.
+    required: true
+  success:
+    description: What counts as success. The agent reports pass or fail against this.
+    required: false
+  context-file:
+    description: A file from this job to give the agent, such as a failing command's output.
+    required: false
+  pull-request:
+    description: The pull request to work on, for workflows that don't run on one.
+    required: false
+  timeout-minutes:
+    description: How long to wait, including any time queued or waiting for approval.
+    required: false
+    default: "60"
+  api-url:
+    description: The withctx API. Only change this for a local stack.
+    required: false
+    default: https://agents-api.withctx.com
+outputs:
+  outcome:
+    description: pass, fail, timed-out or cancelled.
+  summary:
+    description: What the agent said it did or found.
+runs:
+  using: node24
+  main: dist/index.mjs
